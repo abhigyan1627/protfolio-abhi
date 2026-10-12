@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abhigyan · Software Development Engineer</title>
+    <meta name="description" content="Portfolio of Abhigyan — Software Development Engineer building scalable backend systems and polished web apps." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="loader" aria-hidden="true">
+      <div class="loader-inner">
+        <span class="loader-bracket">&lt;</span><span id="loader-text"></span><span class="loader-bracket">/&gt;</span>
+      </div>
+      <div class="loader-bar"><span></span></div>
+    </div>
+
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+    <header class="nav">
+      <a href="#home" class="logo"><span class="accent">&lt;</span><span id="nav-name"></span><span class="accent">/&gt;</span></a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span></button>
+      <nav class="nav-links">
+        <a href="#about" data-num="01">About</a>
+        <a href="#skills" data-num="02">Skills</a>
+        <a href="#experience" data-num="03">Experience</a>
+        <a href="#projects" data-num="04">Projects</a>
+        <a href="#contact" data-num="05">Contact</a>
+        <a id="nav-resume" class="btn btn-outline btn-sm magnetic" target="_blank" rel="noopener">Resume</a>
+      </nav>
+    </header>
+
+    <main id="app"></main>
+
+    <footer class="footer">
+      <p>Designed &amp; built by <span id="footer-name"></span> · <span id="year"></span></p>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
