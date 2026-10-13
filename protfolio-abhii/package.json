@@ -1,0 +1,10 @@
+{
+  "name": "ca-mohit-agrawal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website for CA Mohit Agrawal, Chartered Accountant, Gopalganj, Bihar",
+  "scripts": {
+    "build": "rm -rf dist && mkdir -p dist && cp -r public/. dist/",
+    "start": "npx --yes serve public"
+  }
+}
