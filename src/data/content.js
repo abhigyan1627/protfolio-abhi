@@ -60,7 +60,7 @@ export const principles = [
 
 export const aboutContent = {
   intro: [
-    'AUREVIA Chartered Accountants works with individuals, entrepreneurs and growing businesses on the financial and compliance work that needs to be right the first time.',
+    'CA Mohit Agrawal works with individuals, entrepreneurs and growing businesses in Gopalganj on the financial and compliance work that needs to be right the first time.',
     'We keep the work organised, the scope clear and the communication simple, so that clients can focus on what they are building.',
   ],
   specialisations: [
@@ -80,9 +80,9 @@ export const aboutContent = {
 // Partner profile. Keep verified=false until qualifications, membership and experience have been checked.
 // When verified is false, the About page shows a placeholder instead of these details.
 export const teamProfile = {
-  name: 'Partner profile to be added',
+  name: 'CA Mohit Agrawal',
   role: 'Chartered Accountant',
-  bio: 'A short introduction to the partner, including areas of focus and experience, will appear here once verified.',
+  bio: 'A short introduction, including areas of focus and experience, will appear here once it has been confirmed with the firm.',
   qualifications: [],
   membership: '',
   verified: false,

@@ -7,31 +7,34 @@
  *   '919876543210'. Any value containing letters (such as the 'XX' placeholder) counts as not configured.
  */
 export const siteConfig = {
-  firmName: 'AUREVIA Chartered Accountants',
-  shortName: 'AUREVIA',
-  tagline: 'Clarity in Finance. Confidence in Every Decision.',
+  firmName: 'CA Mohit Agrawal',
+  shortName: 'Mohit Agrawal',
+  tagline: 'Chartered Accountant · Gopalganj, Bihar',
   description:
-    'AUREVIA Chartered Accountants supports individuals, entrepreneurs and growing businesses with income tax, GST, accounting, TDS, business compliance and startup registrations.',
+    'CA Mohit Agrawal, Chartered Accountant in Gopalganj, Bihar, supports individuals and businesses with income tax, GST, accounting, TDS and business compliance.',
 
   logo: {
-    monogram: 'A',
-    wordmark: 'AUREVIA',
-    subtitle: 'Chartered Accountants',
+    monogram: 'M',
+    wordmark: 'MOHIT AGRAWAL',
+    subtitle: 'Chartered Accountant',
     // Optional image logo (for example '/logo.svg' placed in /public). When set, it replaces the monogram.
     image: '',
   },
 
+  // Not yet confirmed. The number listed on Google is a landline-style number, which may not be on WhatsApp.
   whatsappNumber: '91XXXXXXXXXX',
-  phone: '',
+  // Shown as listed on the Google Business profile (062990 33454), written in international format.
+  phone: '+91 62990 33454',
   email: '',
-  city: '',
-  officeAddress: '',
+  city: 'Gopalganj, Bihar',
+  officeAddress: 'Muskan, Kedia Lane, Town Thana, Gopalganj, Bihar 841428',
   // Canonical base URL without a trailing slash, for example 'https://www.example-firm.in'.
   websiteUrl: '',
-  businessHours: [{ days: 'Monday – Saturday', time: '' }],
-  // Google Maps embed URL (https://www.google.com/maps/embed?pb=…) and a link to the office on Google Maps.
-  mapEmbedUrl: '',
-  mapLink: '',
+  // Only the closing time is confirmed so far. Add the full weekly schedule once the firm provides it.
+  businessHours: [{ days: 'Opening hours', time: 'Closes 6:30 pm (full schedule to be confirmed)' }],
+  // Google Maps embed (Plus code FC7V+QC, Gopalganj) and a link to the office. Not yet checked in a browser.
+  mapEmbedUrl: 'https://maps.google.com/maps?q=FC7V%2BQC+Gopalganj+Bihar&output=embed',
+  mapLink: 'https://www.google.com/maps/search/?api=1&query=FC7V%2BQC+Gopalganj+Bihar',
   social: {
     linkedin: '',
     instagram: '',
@@ -52,11 +55,11 @@ export const siteConfig = {
 
   copyright: {
     year: 2026,
-    holder: 'AUREVIA Chartered Accountants',
+    holder: 'CA Mohit Agrawal',
   },
 
   seo: {
-    defaultTitle: 'AUREVIA Chartered Accountants | Tax, GST & Business Compliance',
+    defaultTitle: 'CA Mohit Agrawal | Chartered Accountant, Gopalganj',
     locale: 'en_IN',
     ogImage: '/og-image.png',
     twitterHandle: '',

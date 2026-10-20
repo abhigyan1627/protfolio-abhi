@@ -1,4 +1,4 @@
-# AUREVIA Chartered Accountants: website template
+# CA Mohit Agrawal: website
 
 A React and Vite website for a Chartered Accountant firm. Visitors explore services, compare plans and start an
 enquiry on WhatsApp. The site is built to be re-branded for another firm by editing configuration and data files,
