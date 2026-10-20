@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+/* Brand tokens. Gold is used sparingly for accents; text on ivory uses gold-700 for contrast. */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Manrope", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-deva: "Noto Sans Devanagari", "Inter", sans-serif;
+
+  --color-navy: #10233f;
+  --color-navy-700: #183a5a;
+  --color-navy-900: #0b1829;
+  --color-ivory: #faf8f3;
+  --color-gold: #b89a62;
+  --color-gold-700: #8a6e3c;
+  --color-slate: #5b6b82;
+  --color-ink: #172033;
+  --color-line: #e5e0d4;
+  --color-whatsapp: #1f7a4a;
+  --color-whatsapp-dark: #176339;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #faf8f3;
+    color: #172033;
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    line-height: 1.2;
+  }
+
+  :focus-visible {
+    outline: 2px solid #b89a62;
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

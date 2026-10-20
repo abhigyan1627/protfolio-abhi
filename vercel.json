@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "protfolio-abhii/package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
-    }
+  "installCommand": "cd client && npm ci",
+  "buildCommand": "cd client && npm run build",
+  "outputDirectory": "client/dist",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

@@ -1,0 +1,209 @@
+// Prisma schema for CA Mohit Agrawal website.
+// Prices are stored as integer paise. Null price means "Contact for Quotation".
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../server/src/generated/prisma"
+  moduleFormat = "esm"
+  generatedFileExtension = "ts"
+  importFileExtension    = "js"
+}
+
+datasource db {
+  // The connection URL is read from DATABASE_URL via server/prisma.config.ts.
+  provider = "postgresql"
+}
+
+enum ServiceCategory {
+  INCOME_TAX
+  GST
+  BUSINESS_COMPANY
+  ACCOUNTING_FINANCE
+  AUDIT_OTHER
+}
+
+enum Audience {
+  INDIVIDUAL
+  BUSINESS
+  STARTUP
+}
+
+enum BillingFrequency {
+  ONE_TIME
+  PER_FILING
+  MONTHLY
+  ANNUAL
+  CUSTOM
+}
+
+enum ContactMethod {
+  PHONE
+  WHATSAPP
+  EMAIL
+}
+
+enum EnquiryStatus {
+  NEW
+  CONTACTED
+  IN_PROGRESS
+  CLOSED
+}
+
+enum AdminRole {
+  OWNER
+  EDITOR
+  VIEWER
+}
+
+enum FaqScope {
+  GENERAL
+  HOME
+  SERVICES
+  PRICING
+}
+
+model Service {
+  id           String          @id @default(cuid())
+  name         String
+  slug         String          @unique
+  category     ServiceCategory
+  description  String
+  iconKey      String          @default("file-text")
+  details      Json
+  // enabled: the practice actually provides this service (owner control)
+  enabled      Boolean         @default(false)
+  // published: visible on the public website
+  published    Boolean         @default(false)
+  featured     Boolean         @default(false)
+  displayOrder Int             @default(0)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  enquiries    Enquiry[]
+
+  @@index([category, enabled, published])
+  @@index([displayOrder])
+}
+
+model Plan {
+  id                String           @id @default(cuid())
+  name              String
+  slug              String           @unique
+  audience          Audience
+  serviceCategory   ServiceCategory
+  description       String
+  priceInPaise      Int?
+  currency          String           @default("INR")
+  billingFrequency  BillingFrequency @default(CUSTOM)
+  additionalCharges String?
+  targetCustomer    String
+  inclusions        Json
+  exclusions        Json
+  published         Boolean          @default(false)
+  featured          Boolean          @default(false)
+  displayOrder      Int              @default(0)
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  enquiries         Enquiry[]
+
+  @@index([audience, published, displayOrder])
+  @@index([serviceCategory])
+}
+
+model Enquiry {
+  id            String        @id @default(cuid())
+  referenceCode String        @unique
+  name          String
+  phone         String?
+  email         String?
+  contactMethod ContactMethod
+  serviceId     String?
+  service       Service?      @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+  planId        String?
+  plan          Plan?         @relation(fields: [planId], references: [id], onDelete: SetNull)
+  message       String?
+  consentedAt   DateTime
+  status        EnquiryStatus @default(NEW)
+  internalNote  String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([status, createdAt])
+  @@index([serviceId])
+  @@index([planId])
+}
+
+model AdminUser {
+  id           String         @id @default(cuid())
+  email        String         @unique
+  passwordHash String
+  role         AdminRole      @default(EDITOR)
+  lastLoginAt  DateTime?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  sessions     AdminSession[]
+}
+
+model AdminSession {
+  // HMAC of the random session token. The raw token only lives in the cookie.
+  id          String    @id
+  adminUserId String
+  adminUser   AdminUser @relation(fields: [adminUserId], references: [id], onDelete: Cascade)
+  csrfToken   String
+  expiresAt   DateTime
+  createdAt   DateTime  @default(now())
+
+  @@index([adminUserId])
+  @@index([expiresAt])
+}
+
+model SiteSettings {
+  id                String   @id @default("singleton")
+  businessName      String
+  profession        String   @default("Chartered Accountant")
+  hindiName         String?
+  // Hindi branding is only shown on the site after the owner approves it.
+  hindiNameApproved Boolean  @default(false)
+  phone             String
+  whatsappNumber    String
+  email             String?
+  address           String
+  plusCode          String?
+  businessHours     String?
+  websiteUrl        String?
+  googleBusinessUrl String?
+  googleMapsUrl     String?
+  mapEmbedUrl       String?
+  googleRating      Float?
+  googleReviewCount Int?
+  // Rating is only displayed when the owner confirms the listing is current.
+  showGoogleRating  Boolean  @default(false)
+  updatedAt         DateTime @updatedAt
+}
+
+model Resource {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  category    String
+  excerpt     String
+  body        String
+  published   Boolean   @default(false)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([published, publishedAt])
+}
+
+model FaqEntry {
+  id           String   @id @default(cuid())
+  question     String
+  answer       String
+  scope        FaqScope @default(GENERAL)
+  published    Boolean  @default(false)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([scope, published, displayOrder])
+}
