@@ -73,7 +73,7 @@ cp client/.env.example client/.env
 # 4. Apply migrations and load the proposed content
 cd ../server
 npm run db:deploy                         # non-destructive; applies prisma/migrations
-npm run db:seed                           # idempotent; never overwrites owner edits
+npm run db:seed                           # idempotent; also generates the Prisma client
 
 # 5. Create the first admin account (one-time; there is no public sign-up)
 ADMIN_EMAIL=owner@example.com ADMIN_PASSWORD='use-a-long-passphrase' npm run admin:create
@@ -87,6 +87,34 @@ cd ../client && npm run dev               # site on http://localhost:5173 (proxi
 Open `http://localhost:5173`. The admin panel is at `/admin/login`.
 
 > If you serve the built site with `vite preview` on port 4173, add that origin to the API's `CLIENT_ORIGIN` (for example `CLIENT_ORIGIN=http://localhost:5173,http://localhost:4173`). Admin sign-in is refused from origins that are not on the list.
+
+## Run in VS Code
+
+1. **Open the project:** File → Open Folder → select the top-level `protfolio-abhi` folder (the one containing `client`, `server` and `prisma`).
+2. **Install the recommended extensions:** Prisma (`Prisma.prisma`) for schema highlighting, and Tailwind CSS IntelliSense (`bradlc.vscode-tailwindcss`).
+3. **Open two terminals:** Terminal → New Terminal (`Ctrl+\``). Click the split icon to keep both visible.
+4. **Terminal 1, API:**
+   ```bash
+   cd server
+   npm ci
+   # Create server/.env from the template, then set DATABASE_URL and SESSION_SECRET
+   npm run db:deploy
+   npm run db:seed
+   npm run dev
+   ```
+5. **Terminal 2, website:**
+   ```bash
+   cd client
+   npm ci
+   npm run dev
+   ```
+6. Open <http://localhost:5173>. Create an admin account once with `npm run admin:create` (see Quick start), then sign in at <http://localhost:5173/admin/login>.
+
+Notes:
+
+- Editor errors such as "cannot find module" in `server/src/generated` are expected until the Prisma client has been generated. Running `npm run db:seed` or `npm run dev` generates it.
+- Stop a server with `Ctrl+C` in its terminal.
+- **Windows (PowerShell):** copy the template with `copy .env.example .env`, and set variables with `$env:ADMIN_EMAIL="owner@example.com"` followed by `$env:ADMIN_PASSWORD="your-passphrase"` before running `npm run admin:create`. `createdb` may not be on PATH; use pgAdmin to create the two databases instead.
 
 ## Environment variables
 

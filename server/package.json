@@ -11,14 +11,14 @@
     "build": "prisma generate && tsc -p tsconfig.build.json",
     "start": "node dist/server.js",
     "start:prod": "prisma migrate deploy && node dist/server.js",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "node scripts/run-tests.mjs",
+    "typecheck": "prisma generate && tsc -p tsconfig.json --noEmit",
+    "test": "prisma generate && node scripts/run-tests.mjs",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
     "db:reset": "prisma migrate reset",
-    "db:seed": "tsx src/seed.ts",
-    "admin:create": "tsx src/scripts/createAdmin.ts"
+    "db:seed": "prisma generate && tsx src/seed.ts",
+    "admin:create": "prisma generate && tsx src/scripts/createAdmin.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.1",
